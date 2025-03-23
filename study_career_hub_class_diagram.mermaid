@@ -1,0 +1,97 @@
+classDiagram
+    class User {
+        +String userId
+        +String email
+        +String username
+        +String password
+        +UserType type
+        +Integer points
+        +Boolean isVerified
+        +Date createdAt
+        +register()
+        +login()
+        +updateProfile()
+        +changePassword()
+    }
+
+    class Profile {
+        +String userId
+        +String avatar
+        +String education
+        +String location
+        +Array[String] interests
+        +String bio
+        +updateAvatar()
+        +updateInfo()
+    }
+
+    class Content {
+        +String contentId
+        +String userId
+        +String title
+        +String body
+        +Array[String] tags
+        +ContentType type
+        +Integer views
+        +Date createdAt
+        +create()
+        +update()
+        +delete()
+        +view()
+    }
+
+    class Comment {
+        +String commentId
+        +String contentId
+        +String userId
+        +String text
+        +Integer likes
+        +String parentId
+        +Date createdAt
+        +create()
+        +update()
+        +delete()
+        +like()
+    }
+
+    class Tag {
+        +String tagId
+        +String name
+        +String description
+        +Integer usageCount
+        +create()
+        +update()
+        +delete()
+    }
+
+    class Notification {
+        +String notificationId
+        +String userId
+        +String type
+        +String content
+        +Boolean isRead
+        +Date createdAt
+        +create()
+        +markAsRead()
+        +delete()
+    }
+
+    class Message {
+        +String messageId
+        +String senderId
+        +String receiverId
+        +String content
+        +Boolean isRead
+        +Date createdAt
+        +send()
+        +read()
+        +delete()
+    }
+
+    User "1" -- "1" Profile : has
+    User "1" -- "*" Content : creates
+    User "1" -- "*" Comment : writes
+    Content "1" -- "*" Comment : has
+    Content "*" -- "*" Tag : tagged with
+    User "1" -- "*" Notification : receives
+    User "1" -- "*" Message : sends/receives

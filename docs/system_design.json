@@ -1,0 +1,143 @@
+{
+  "systemArchitecture": {
+    "frontEnd": {
+      "framework": "React",
+      "language": "TypeScript",
+      "styling": "Tailwind CSS",
+      "stateManagement": "Redux",
+      "libraries": [
+        "react-router-dom",
+        "axios",
+        "react-query",
+        "formik",
+        "draft-js"
+      ]
+    },
+    "backEnd": {
+      "framework": "Node.js + Express",
+      "language": "TypeScript",
+      "architecture": "Microservices",
+      "services": {
+        "userService": "用户认证和管理",
+        "contentService": "内容管理",
+        "interactionService": "社交互动",
+        "searchService": "搜索服务",
+        "notificationService": "通知服务"
+      }
+    },
+    "database": {
+      "primary": {
+        "type": "MongoDB",
+        "purpose": "Main data storage",
+        "sharding": true
+      },
+      "cache": {
+        "type": "Redis",
+        "purpose": "Session, Cache"
+      },
+      "search": {
+        "type": "Elasticsearch",
+        "purpose": "Full-text search"
+      }
+    },
+    "infrastructure": {
+      "hosting": "AWS",
+      "cdn": "CloudFront",
+      "containerization": "Docker + Kubernetes",
+      "loadBalancer": "Nginx",
+      "messaging": "RabbitMQ",
+      "storage": "AWS S3"
+    }
+  },
+  "databaseSchema": {
+    "users": {
+      "_id": "ObjectId",
+      "email": "String (unique)",
+      "password": "String (hashed)",
+      "username": "String",
+      "userType": "Enum(normal, vip, verified)",
+      "points": "Number",
+      "createdAt": "Date",
+      "profile": {
+        "avatar": "String (url)",
+        "bio": "String",
+        "education": "Array",
+        "location": "String"
+      }
+    },
+    "contents": {
+      "_id": "ObjectId",
+      "authorId": "ObjectId (ref: users)",
+      "title": "String",
+      "content": "String",
+      "type": "Enum(post, article, question)",
+      "tags": "Array<String>",
+      "views": "Number",
+      "likes": "Number",
+      "createdAt": "Date",
+      "updatedAt": "Date"
+    },
+    "comments": {
+      "_id": "ObjectId",
+      "contentId": "ObjectId (ref: contents)",
+      "userId": "ObjectId (ref: users)",
+      "text": "String",
+      "parentId": "ObjectId (optional)",
+      "createdAt": "Date"
+    },
+    "notifications": {
+      "_id": "ObjectId",
+      "userId": "ObjectId (ref: users)",
+      "type": "String",
+      "content": "String",
+      "isRead": "Boolean",
+      "createdAt": "Date"
+    }
+  },
+  "apis": {
+    "user": {
+      "POST /api/auth/register": "用户注册",
+      "POST /api/auth/login": "用户登录",
+      "GET /api/users/profile": "获取用户信息",
+      "PUT /api/users/profile": "更新用户信息",
+      "GET /api/users/:id/posts": "获取用户发帖"
+    },
+    "content": {
+      "POST /api/contents": "创建内容",
+      "GET /api/contents": "获取内容列表",
+      "GET /api/contents/:id": "获取内容详情",
+      "PUT /api/contents/:id": "更新内容",
+      "DELETE /api/contents/:id": "删除内容"
+    },
+    "comment": {
+      "POST /api/contents/:id/comments": "发表评论",
+      "GET /api/contents/:id/comments": "获取评论列表",
+      "PUT /api/comments/:id": "更新评论",
+      "DELETE /api/comments/:id": "删除评论"
+    },
+    "interaction": {
+      "POST /api/contents/:id/like": "点赞内容",
+      "POST /api/users/:id/follow": "关注用户",
+      "GET /api/notifications": "获取通知"
+    },
+    "search": {
+      "GET /api/search": "全文搜索",
+      "GET /api/search/tags": "标签搜索"
+    }
+  },
+  "security": {
+    "authentication": "JWT + OAuth2.0",
+    "authorization": "RBAC",
+    "encryption": {
+      "data": "AES-256",
+      "password": "bcrypt"
+    },
+    "protection": [
+      "Rate Limiting",
+      "CORS",
+      "XSS Prevention",
+      "CSRF Protection",
+      "SQL Injection Prevention"
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+sequenceDiagram
+    participant C as Client
+    participant A as AuthService
+    participant U as UserService
+    participant Co as ContentService
+    participant N as NotificationService
+    participant DB as Database
+    participant Cache as Redis
+
+    %% User Registration Flow
+    C->>A: register(email, password)
+    A->>DB: checkEmailExists(email)
+    DB-->>A: emailStatus
+    A->>U: createUser(userData)
+    U->>DB: saveUser(userData)
+    DB-->>U: userId
+    U->>N: sendWelcomeNotification(userId)
+    N->>DB: saveNotification()
+    A-->>C: registrationSuccess
+
+    %% Content Creation Flow
+    C->>A: authenticate(token)
+    A-->>C: authSuccess
+    C->>Co: createContent(contentData)
+    Co->>DB: saveContent(contentData)
+    DB-->>Co: contentId
+    Co->>Cache: invalidateContentCache()
+    Co->>N: notifyFollowers(userId)
+    N->>DB: saveNotifications()
+    Co-->>C: contentCreated
+
+    %% Content Viewing Flow
+    C->>Co: getContent(contentId)
+    Co->>Cache: checkCache(contentId)
+    Cache-->>Co: cachedContent
+    alt Cache Miss
+        Co->>DB: fetchContent(contentId)
+        DB-->>Co: content
+        Co->>Cache: setCache(content)
+    end
+    Co-->>C: returnContent
+
+    %% Comment Creation Flow
+    C->>Co: addComment(contentId, comment)
+    Co->>DB: saveComment(commentData)
+    DB-->>Co: commentId
+    Co->>N: notifyContentOwner(contentId)
+    N->>DB: saveNotification()
+    Co-->>C: commentSuccess

@@ -1,0 +1,15 @@
+{
+  "description": " - This is a template for general web app, game, common application,client,tool,component development. It is based on React framework with Tailwind CSS. The template includes the basic structure of a React project, including an index.html file and a src directory with an App.jsx file.\n - Modify index.html to change web title, create new jsx files under src if needed, and rewrite src/App.jsx to meet the user's requirements. You should NOT modify src/main.jsx and src/index.css. Modify vite.config.js only if extra config is absolutely necessary.\n - Style your elements with Tailwind CSS classes directly in the jsx files.\n - If the user's requirements do not specify a technology stack, development language, development tools, components, etc., this template will be used by default. For example, developing an XXX application, XXX client, etc. all use this template.",
+  "required_fields": [],
+  "required_files": [
+    "index.html",
+    "src/main.jsx",
+    "src/App.jsx",
+    "src/index.css",
+    "vite.config.js"
+  ],
+  "lang": "JavaScript",
+  "framework": "React",
+  "style": "react_template",
+  "scene": "default_web_project"
+}
