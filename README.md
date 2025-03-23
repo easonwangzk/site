@@ -21,6 +21,6 @@
 ## 技术栈
 
 - **前端**：React + Tailwind CSS  
-- **后端**：Node.js / Express（视具体实现而定）  
-- **数据库**：MongoDB / Firebase / Supabase（如有接入）  
+- **后端**：Node.js / Express
+- **数据库**：MongoDB / Firebase / Supabase 
 - **部署平台**：MGX.dev 平台部署
