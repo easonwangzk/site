@@ -4,7 +4,7 @@
 
 该网站是一个留学咨询平台，旨在为有意向出国留学的学生提供全面、便捷、个性化的咨询服务。用户可以通过本平台获取专业建议、查看热门留学目的地、预约顾问服务，并获取留学申请流程的详细指导。
 
-访问地址：👉 [点击访问平台](https://study-abroad-consultation-uxunh-xp9n1d-7b0545.mgx.dev)
+访问地址：👉 [点击访问平台](https://study-abroad-consultation-easonwangzk-v1.mgx.world)
 
 ---
 
